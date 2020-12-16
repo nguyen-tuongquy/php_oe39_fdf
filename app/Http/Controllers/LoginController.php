@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Socialite;
+use Hash;
+use Str;
+use Datetime;
 class LoginController extends Controller
 {
     public function showLoginForm()
@@ -33,5 +38,31 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect()->route('auth.showLoginForm');
+    }
+
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function callback($provider)
+    {
+        $userInfo = Socialite::driver($provider)->user();
+        
+        $user = User::firstOrCreate(
+        [
+            'email' => $userInfo->email,
+        ],
+        
+        [
+            'fullname' => $userInfo->name,
+            'username' => uniqid(rand(), true),
+            'password' => Hash::make(Str::random(24)),
+            'created_at' => new Datetime(),
+        ]);
+
+        Auth::login($user, true);
+
+        return redirect('/');
     }
 }

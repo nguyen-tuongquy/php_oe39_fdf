@@ -34,10 +34,14 @@
                         <h3 class="font-weight-600 mb-4">{{ trans('main.auth.login') }}</h3>
                         <div class="form-row mb-3">
                             <div class="col-4 col-sm-4 col-lg-6">
-                                <a href="" class="btn btn-google btn-sm btn-block font-weight-400 shadow-none"><span class="mr-2"><i class="fab fa-google"></i></span><span class="d-none d-lg-inline">{{ trans('main.login_with_google') }}</span></a>
+                                <a href="{{ route('social-login', [
+                                    'provider' => 'google',
+                                ]) }}" class="btn btn-google btn-sm btn-block font-weight-400 shadow-none"><span class="mr-2"><i class="fab fa-google"></i></span><span class="d-none d-lg-inline">{{ trans('main.login_with_google') }}</span></a>
                             </div>
                             <div class="col-4 col-sm-4 col-lg-6">
-                                <a href="" class="btn btn-facebook btn-sm btn-block font-weight-400 shadow-none"><span class="mr-2"><i class="fab fa-facebook-f"></i></span><span class="d-none d-lg-inline">{{ trans('main.login_with_facebook') }}</span></a>
+                                <a href="{{ route('social-login', [
+                                    'provider' => 'facebook',
+                                ]) }}" class="btn btn-facebook btn-sm btn-block font-weight-400 shadow-none"><span class="mr-2"><i class="fab fa-facebook-f"></i></span><span class="d-none d-lg-inline">{{ trans('main.login_with_facebook') }}</span></a>
                             </div>
                         </div>
                         <div class="d-flex align-items-center my-4">

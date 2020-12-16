@@ -24,3 +24,7 @@ Route::post('register', 'RegisterController@register')->name('auth.register');
 Route::get('login', 'LoginController@showLoginForm')->name('auth.showLoginForm');
 Route::post('login', 'LoginController@login')->name('auth.login');
 Route::post('logout', 'LoginController@logout')->name('auth.logout');
+
+
+Route::get('/login/{provider}', 'LoginController@redirectToProvider')->name('social-login');
+Route::get('login/{provider}/callback', 'LoginController@callback')->name('social-callback');
